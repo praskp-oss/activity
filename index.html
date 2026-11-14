@@ -558,15 +558,18 @@
         <div class="card-title">1. Identitas CRO</div>
         <div class="grid-2">
           <div class="form-group">
-            <label for="namaCRO">Nama CRO <span style="color:var(--danger)">*</span></label>
-            <input type="text" id="namaCRO" list="croList" placeholder="Ketik atau pilih nama CRO..." required />
-            <datalist id="croList">
-              <option value="Andi Pratama"></option>
-              <option value="Budi Santoso"></option>
-              <option value="Citra Lestari"></option>
-              <option value="Dewi Anggraini"></option>
-              <option value="Rizky Ramadhan"></option>
-            </datalist>
+            <label for="namaCRO">Nama Sales / CRO <span style="color:var(--danger)">*</span></label>
+            <select id="namaCRO" required>
+              <option value="" disabled selected>-- Pilih Nama CRO --</option>
+              <option value="Brayen">Brayen</option>
+              <option value="Jessica">Jessica</option>
+              <option value="Kaila">Kaila</option>
+              <option value="Arfan">Arfan</option>
+              <option value="Uyun">Uyun</option>
+                <option value="Sari">Sari</option>
+                <option value="Nina">Nina</option>
+                <option value="Yuli">Yuli</option>
+            </select>
           </div>
           <div class="form-group">
             <label for="tanggalLaporan">Tanggal Laporan <span style="color:var(--danger)">*</span></label>
@@ -589,32 +592,32 @@
       <div class="card">
         <div class="card-title">2. Ceklis Aktivitas Harian &amp; Bukti Screenshot</div>
 
-        <!-- Tugas 1: Follow Up Customer -->
+        <!-- Tugas 1: Follow Up dan Apply Limit -->
         <div class="task-card" id="cardFU">
           <label class="task-header" for="chkFU">
             <input type="checkbox" id="chkFU" class="task-checkbox" />
             <div class="task-info">
               <div class="task-title">
-                Follow Up Customer
+                Follow Up dan Apply Limit
                 <span class="badge badge-blue">Wajib Harian</span>
               </div>
-              <div class="task-desc">Hubungi prospek baru maupun follow up customer lama via WhatsApp / Telepon.</div>
+              <div class="task-desc">Hubungi prospek baru, follow up customer lama, serta proses pengajuan / apply limit.</div>
             </div>
           </label>
           <div class="task-details">
             <div class="form-group">
-              <label for="jmlFU">Jumlah Customer Di-Follow Up</label>
+              <label for="jmlFU">Jumlah Customer Follow Up &amp; Apply Limit</label>
               <input type="number" id="jmlFU" min="0" placeholder="Contoh: 15" />
             </div>
             <div class="form-group">
-              <label>Upload Bukti Screenshot Chat / Log Call</label>
+              <label>Upload Bukti Screenshot Follow Up &amp; Apply Limit</label>
               <div class="upload-zone" id="zoneFU">
                 <input type="file" id="fileFU" accept="image/*" />
                 <div class="upload-placeholder" id="placeholderFU">
                   📸 <strong>Pilih Foto / Screenshot</strong> atau tarik gambar ke sini
                 </div>
                 <div class="preview-box" id="previewFU">
-                  <img src="" alt="Preview Follow Up" class="preview-thumb" id="imgFU" />
+                  <img src="" alt="Preview Follow Up &amp; Apply Limit" class="preview-thumb" id="imgFU" />
                   <div class="preview-meta">
                     <div id="nameFU" style="font-weight:600; word-break:break-all;">screenshot.jpg</div>
                     <div class="preview-actions">
@@ -801,7 +804,7 @@
       return file.getUrl();
     }
 
-    var linkFU = saveImage(data.buktiFollowUp, "FollowUp");
+    var linkFU = saveImage(data.buktiFollowUp, "FollowUp_ApplyLimit");
     var linkPosting = saveImage(data.buktiPosting, "Posting");
     var linkLive = saveImage(data.buktiLive, "LiveTikTok");
 
@@ -1031,7 +1034,7 @@
 
       imgEl.addEventListener("click", (e) => {
         e.stopPropagation();
-        openLightbox(imagesState[key], "Bukti Screenshot - " + key);
+        openLightbox(imagesState[key], "Bukti Screenshot - " + (key === "FU" ? "Follow Up & Apply Limit" : key));
       });
     });
 
@@ -1079,7 +1082,7 @@
       const tanggal = document.getElementById("tanggalLaporan").value;
 
       if (!namaCRO) {
-        showAlert("Nama CRO wajib diisi!", "error");
+        showAlert("Silakan pilih Nama CRO terlebih dahulu!", "error");
         return;
       }
 
